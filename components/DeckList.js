@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet, SafeAreaView, TouchableOpacity} from 'react-native';
+import { View, Text, FlatList, StyleSheet, SafeAreaView, TouchableOpacity, AsyncStorage} from 'react-native';
 import {getDecks} from '../utils/api';
 import { connect } from 'react-redux';
+const DECKS_STORAGE_KEY = 'Decks';
+
 
 
 
@@ -33,12 +35,14 @@ function Item({ title, questions, navigation }) {
 class DeckList extends React.Component {
 
     componentDidMount(){
-        getDecks()
-            .then((decks) => {
+        /*getDecks()
+            then((decks) => {
                 if(decks){
-                 //  console.log(decks);
                 }
-            })
+            }) */
+
+            AsyncStorage.removeItem(DECKS_STORAGE_KEY);
+
     }
 
     render() {

@@ -1,7 +1,7 @@
-import { GET_DECKS, ADD_DECK } from '../actions/index'
+import { GET_DECKS, ADD_DECK, ADD_CARD } from '../actions/index'
 
 function decks(state={}, action){
-   // console.log(action);
+    console.log(action);
     switch(action.type){
         case GET_DECKS:
             return {
@@ -11,6 +11,16 @@ function decks(state={}, action){
             return {
                 ...state,
                 ...action.deck
+
+            }
+        case ADD_CARD:
+            return {
+                ...state,
+                [action.payload.title]: {
+                    ...action.payload.title,
+                    [action.payload.title['questions']]: [...action.payload.title['questions'],{a:'1', b:'2'}]                    
+
+                }
 
             }
         default:

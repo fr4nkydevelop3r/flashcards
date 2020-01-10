@@ -7,8 +7,15 @@ export function getDecks(){
 }
 
 export function createDeck(deck){
+    //console.log(deck);
     return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify(deck));
-
 }
 
+
+
+export function addCard(titile, card){
+
+    return AsyncStorage.mergeItem(DECKS_STORAGE_KEY,);
+
+}
 

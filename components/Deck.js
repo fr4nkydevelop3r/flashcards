@@ -4,7 +4,10 @@ import { View, Text, Button } from 'react-native';
 class Deck extends React.Component {
 
     addCard = () => {
-        console.log('Add card!');
+        const { navigation } = this.props;
+        const title = navigation.getParam('title');
+        navigation.navigate('NewCard', {title});
+        
     }
 
     render() {

@@ -2,6 +2,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import DeckList from './DeckList';
 import Deck from './Deck';
+import NewCard from './NewCard';
 
 const screens = {
     DeckList: {
@@ -9,7 +10,11 @@ const screens = {
     },
     Deck: {
         screen: Deck
+    },
+    NewCard: {
+        screen: NewCard
     }
+    
 }
 
 const StackNavigator= createStackNavigator(screens);
