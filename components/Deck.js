@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
+import { connect } from 'react-redux'
 
 class Deck extends React.Component {
 
@@ -12,11 +13,11 @@ class Deck extends React.Component {
 
     render() {
 
-        const {navigation} = this.props;
+        const {cards, title} = this.props;
         return (
             <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
-                <Text>{navigation.getParam('title')}</Text>
-                <Text>{navigation.getParam('questions').length} cards</Text>
+                <Text>{title}</Text>
+                <Text>{cards.length} cards</Text>
                 <Button
                     title="Add Card"
                     onPress={this.addCard}
@@ -27,4 +28,18 @@ class Deck extends React.Component {
     }
 }
 
-export default Deck;
+
+function mapStateToProps(decks, ownProps){
+
+    const { navigation } = ownProps
+    const key = navigation.getParam('title');
+
+
+    const cards = decks[key]['questions'];
+    return{
+        cards,
+        title: key
+    }
+}
+
+export default connect(mapStateToProps, null)(Deck);

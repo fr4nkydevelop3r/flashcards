@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, TextInput, View, Button } from 'react-native';
-import {createDeck, getDecks} from '../utils/api';
+import {createDeck} from '../utils/api';
 import { addDeck } from '../actions/index';
 import { connect } from 'react-redux';
 
@@ -17,6 +17,7 @@ class NewDeck extends React.Component {
     handleCreate = () => {
 
         const {title} = this.state;
+        const { navigation } = this.props;
 
         const deck = {
             [title]: {
@@ -29,11 +30,13 @@ class NewDeck extends React.Component {
         createDeck(deck)
         .then(() => {
             this.props.dispatch(addDeck(deck));
+            navigation.navigate('Deck', {title});
         })
         
         .catch(() => {
             console.log('Ups, error saving the deck title');
         })
+
 
     
     }

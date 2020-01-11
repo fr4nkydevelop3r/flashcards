@@ -3,6 +3,8 @@ import { View, Text, Button, TextInput } from 'react-native';
 import {getDecks,createDeck} from '../utils/api';
 import { connect } from 'react-redux';
 import { addCard } from '../actions/index';
+
+
 class NewCard extends React.Component {
 
     state = {
@@ -18,7 +20,8 @@ class NewCard extends React.Component {
         })
 
 
-         
+         const { navigation } = this.props;
+
          const { question, answer } = this.state;
          const deck = {
             [title]: {
@@ -28,10 +31,21 @@ class NewCard extends React.Component {
          } 
 
 
-         createDeck(deck)
+         this.props.dispatch(addCard({title,question,answer }))
+
+
+        createDeck(deck)
          .then(() => {
-             this.props.dispatch(addCard({title: title }))
+             //this.props.dispatch(addCard({title: title }))
+    
+             navigation.navigate('Deck',{title});
          })
+         .catch(() => {
+             console.log('Something went wrong');
+         })
+
+
+
 
 
          //console.log(questions);  
@@ -51,6 +65,7 @@ class NewCard extends React.Component {
 
         const { cards, title }  = this.props;
 
+        //console.log(cards);
 
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>

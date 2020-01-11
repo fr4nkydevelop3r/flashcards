@@ -1,7 +1,8 @@
 import { GET_DECKS, ADD_DECK, ADD_CARD } from '../actions/index'
 
 function decks(state={}, action){
-    console.log(action);
+   /* console.log(state);
+    console.log(action.payload); */
     switch(action.type){
         case GET_DECKS:
             return {
@@ -13,12 +14,13 @@ function decks(state={}, action){
                 ...action.deck
 
             }
-        case ADD_CARD:
+        case ADD_CARD:  
             return {
                 ...state,
                 [action.payload.title]: {
-                    ...action.payload.title,
-                    [action.payload.title['questions']]: [...action.payload.title['questions'],{a:'1', b:'2'}]                    
+                    ...state[action.payload.title],
+                    ['questions']: [...state[action.payload.title]['questions'], {question:action.payload.question, answer: action.payload.answer}]
+                    
 
                 }
 
