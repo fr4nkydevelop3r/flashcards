@@ -13,7 +13,7 @@ class Deck extends React.Component {
 
     render() {
 
-        const {cards, title} = this.props;
+        const {cards, title, navigation} = this.props;
         return (
             <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
                 <Text>{title}</Text>
@@ -21,6 +21,10 @@ class Deck extends React.Component {
                 <Button
                     title="Add Card"
                     onPress={this.addCard}
+                />
+                <Button 
+                    title="Quiz"
+                    onPress={() =>  navigation.navigate('Quiz', {title}) }
                 />
         
             </View>

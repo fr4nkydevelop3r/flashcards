@@ -11,7 +11,7 @@ const tabs = {
     DeckList: {
         screen: StackNavigator,
         navigationOptions: {
-            tabBarLabel: 'Decks'
+            tabBarLabel:     'Decks'
         }
     },
     NewDeck: {

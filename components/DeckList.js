@@ -7,28 +7,33 @@ const DECKS_STORAGE_KEY = 'Decks';
 
 
 
-function Item({ title, questions, navigation }) {
-
-    onPress = () => {
-      navigation.navigate('Deck', {title, questions});
-    }
-
-    return (
-
-      <TouchableOpacity
-      style={styles.button}
-      onPress={this.onPress}
-    > 
-     <View>
-        <Text >{title}</Text>
-        <Text>{questions.length} cards</Text>
-      </View>
-    </TouchableOpacity>
+function Item ({title, navigation}){
 
 
-     
-    );
+
+  onPress = () => {
+    
+    navigation.push('Deck2');
+    //alert('Hey!');
+   
   }
+
+  return (
+    <TouchableOpacity onPress={this.onPress}>
+     <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+       <Text>{title}</Text>
+     </View>
+    </TouchableOpacity>
+  )
+}
+
+
+
+
+
+
+
+
 
   
 
@@ -44,6 +49,8 @@ class DeckList extends React.Component {
             AsyncStorage.removeItem(DECKS_STORAGE_KEY);
 
     }
+
+ 
 
     render() {
 
