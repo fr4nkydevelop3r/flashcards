@@ -27,7 +27,7 @@ class NewDeck extends React.Component {
         }
 
 
-        /*createDeck(deck)
+        createDeck(deck)
         .then(() => {
             this.props.dispatch(addDeck(deck));
             navigation.navigate('Deck', {title});
@@ -35,10 +35,9 @@ class NewDeck extends React.Component {
         
         .catch(() => {
             console.log('Ups, error saving the deck title');
-        })*/
+        })
 
-        this.props.dispatch(addDeck(deck));
-        navigation.navigate('DeckList');
+ 
 
 
     

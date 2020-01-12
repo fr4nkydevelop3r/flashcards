@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet, SafeAreaView, TouchableOpacity, AsyncStorage} from 'react-native';
+import { View, Text, FlatList, StyleSheet, 
+  SafeAreaView, TouchableOpacity, AsyncStorage,
+  NavigationEvents, Alert} from 'react-native';
 import {getDecks} from '../utils/api';
 import { connect } from 'react-redux';
 const DECKS_STORAGE_KEY = 'Decks';
@@ -7,21 +9,20 @@ const DECKS_STORAGE_KEY = 'Decks';
 
 
 
-function Item ({title, navigation}){
+function Item ({title, navigation, questions}){
 
-
-
-  onPress = () => {
+   onPress = () => {
     
-    navigation.push('Deck2');
-    //alert('Hey!');
+    navigation.navigate('Deck', {title});
    
   }
 
   return (
     <TouchableOpacity onPress={this.onPress}>
+      
      <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
        <Text>{title}</Text>
+       <Text>{questions.length} cards</Text>
      </View>
     </TouchableOpacity>
   )
@@ -39,6 +40,8 @@ function Item ({title, navigation}){
 
 class DeckList extends React.Component {
 
+
+
     componentDidMount(){
         /*getDecks()
             then((decks) => {
@@ -51,6 +54,9 @@ class DeckList extends React.Component {
     }
 
  
+  
+  
+ 
 
     render() {
 
@@ -58,12 +64,14 @@ class DeckList extends React.Component {
         //console.log(decks);
         const listDecks = Object.values(decks);
         //console.log(listDecks);
-
         return (
+
+         
 
             Object.keys(listDecks).length > 0 
             
-            ?   <SafeAreaView style={styles.container}>
+            ?   
+              <SafeAreaView style={styles.container}>
                     <FlatList 
                         data={listDecks}
                         renderItem={({ item }) => <Item title={item.title} questions={item.questions} navigation={navigation} />}
@@ -72,6 +80,8 @@ class DeckList extends React.Component {
                         
                     />
                 </SafeAreaView> 
+            
+              
             : <View style={styles.container}><Text>You don't have decks yet!</Text></View>
        
         )

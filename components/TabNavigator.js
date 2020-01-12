@@ -4,6 +4,10 @@ import { createAppContainer} from 'react-navigation';
 import {createBottomTabNavigator, createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import StackNavigator from './StackNavigator';
 import NewDeck from './NewDeck';
+import NewCard from './NewCard';
+import Quiz from './Quiz';
+import Deck from './Deck';
+import { createStackNavigator } from 'react-navigation-stack';
 
 
 
@@ -11,7 +15,7 @@ const tabs = {
     DeckList: {
         screen: StackNavigator,
         navigationOptions: {
-            tabBarLabel:     'Decks'
+            tabBarLabel: 'Decks'
         }
     },
     NewDeck: {
@@ -20,6 +24,7 @@ const tabs = {
             tabBarLabel: 'New Deck'
         }
     }
+ 
 }
 
 const navigationOptions = {
@@ -39,4 +44,24 @@ Platform.OS === 'ios'
     ? createBottomTabNavigator(tabs,navigationOptions)
     : createMaterialTopTabNavigator(tabs, navigationOptions)
 
-export default createAppContainer(TabNavigator);
+
+    const HomeStack = createStackNavigator({
+        Decks: {
+            screen: TabNavigator,
+            navigationOptions: {
+                headerShown: false,
+              },
+        },
+        Deck: {
+            screen: Deck,
+        },
+        NewCard: NewCard,
+        Quiz: Quiz
+    
+      });
+
+
+export default createAppContainer(HomeStack);
+
+
+

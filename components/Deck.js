@@ -1,8 +1,25 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { HeaderBackButton } from 'react-navigation-stack';
+
 
 class Deck extends React.Component {
+
+    static navigationOptions = ({ navigation }) => {
+        return {
+          title: navigation.getParam('title'),
+          headerLeft: () => 
+          
+          <HeaderBackButton  
+            onPress={_ => navigation.navigate("DeckList")}
+            label='Decks'
+
+            />,
+      
+        };
+      };
+    
 
     addCard = () => {
         const { navigation } = this.props;
