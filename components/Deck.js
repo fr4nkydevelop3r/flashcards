@@ -40,10 +40,9 @@ class Deck extends React.Component {
                     onPress={this.addCard}
                 />
                 <Button 
-                    title="Quiz"
+                    title="Start Quiz"
                     onPress={() =>  navigation.navigate('Quiz', {title}) }
                 />
-        
             </View>
         )   
     }

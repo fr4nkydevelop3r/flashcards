@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Button } from 'react-native';
 import { connect } from 'react-redux';
 import CardQuestion from './CardQuestion';
 import CardAnswer from './CardAnswer';
@@ -42,11 +42,22 @@ class Quiz extends React.Component{
            currentQuestion: this.state.currentQuestion + 1
        }))
    }
+
+   handleResetQuiz = () => {
+       this.setState(({
+        showCard : 'question',
+        totalQuestions: this.props.questions.length,
+        currentQuestion: 0,
+        totalCorrect: 0,
+        totalIncorrect: 0  
+       }))
+
+   }
     
 
     render () {
 
-        const {title, questions} = this.props;
+        const {questions} = this.props;
         const { totalQuestions, 
                 showCard, 
                 currentQuestion, 
@@ -69,6 +80,11 @@ class Quiz extends React.Component{
                     <View>
                         <Text>You got {totalCorrect} correct answers!</Text>
                         <Text>You got {totalIncorrect} incorrect answers!</Text>
+                        <Button
+                            title="Reset Quiz"
+                            onPress={() => this.handleResetQuiz() }
+                        />
+
                     </View> :
 
                      showCard === 'question' ?
@@ -77,12 +93,16 @@ class Quiz extends React.Component{
                             handleShow={this.handleShow}
                             handleCurrent={this.handleCurrent}
                             handleAnswer={this.handleAnswer}
+                            currentQuestion={currentQuestion + 1}
+                            totalQuestions={totalQuestions}
                         /> :
                         <CardAnswer 
                             answer = {questions[currentQuestion]['answer']}
                             handleShow={this.handleShow}
                             handleCurrent={this.handleCurrent}
                             handleAnswer={this.handleAnswer}
+                            currentQuestion={currentQuestion + 1}
+                            totalQuestions={totalQuestions}
                         />
                 }
             </View>

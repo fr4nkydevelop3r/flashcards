@@ -7,17 +7,22 @@ import { addCard } from '../actions/index';
 
 class NewCard extends React.Component {
 
+    static navigationOptions = ({ navigation }) => {
+        return {
+          title: 'Add Card'
+         };
+      };
+    
+
     state = {
         question: '',
-        answer: ''
+        validateQuestion: '',
+        answer: '',
+        validateAnswer: ''
     }
 
     addCard = (cards, title) => {
 
-        getDecks()
-        .then((decks) => {
-            //console.log(JSON.parse(decks));
-        })
 
 
          const { navigation } = this.props;
@@ -31,56 +36,67 @@ class NewCard extends React.Component {
          } 
 
 
-         this.props.dispatch(addCard({title,question,answer }))
 
+        if(answer && question){
+            
+            this.props.dispatch(addCard({title,question,answer }))
+            this.setState(({
+                question: '',
+                answer:''
+            }))
 
-        createDeck(deck)
-         .then(() => {
-             //this.props.dispatch(addCard({title: title }))
-    
-             navigation.navigate('Deck',{title});
-         })
-         .catch(() => {
-             console.log('Something went wrong');
-         })
+            createDeck(deck)
+            .then(() => {        
+                navigation.navigate('Deck',{title});
+            })
+            .catch(() => {
+                console.log('Something went wrong');
+            })
 
-
-
-
-
-         //console.log(questions);  
-        /**
-         * const deck = {
-            [title]: {
-                title,
-                questions: []
-            }
+        } else{
+           if(!answer){
+               this.setState(({
+                   validateAnswer: 'Please write an answer'
+               }))
+           }
+           if(!question){
+            this.setState(({
+                validateQuestion: 'Please write a question'
+            }))
         }
-         */
+
+        }
 
 
     }
+
     
     render() {
 
         const { cards, title }  = this.props;
+        const {validateQuestion, validateAnswer} = this.state;
+
 
         //console.log(cards);
 
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <TextInput
-                    style={{height: 40}}
+                    style={{ padding:10, width: 150, borderColor: 'gray', borderWidth: 1 }}                    
                     placeholder="Question"
-                    onChangeText={(question) => this.setState({question})}
+                    onChangeText={(question) => this.setState({question, validateQuestion: ''})}
                     value={this.state.question}
                 />
+                {validateQuestion.length > 0 && <Text>{validateQuestion}</Text>}
+                
                   <TextInput
-                    style={{height: 40}}
+                    style={{ padding:10, width: 150, borderColor: 'gray', borderWidth: 1 }}                    
                     placeholder="Answer"
-                    onChangeText={(answer) => this.setState({answer})}
+                    onChangeText={(answer) => this.setState({answer, validateAnswer: ''})}
                     value={this.state.answer}
                 />
+
+                {validateAnswer.length > 0 && <Text>{validateAnswer}</Text>}
                 <Button
                     title="Submit"
                     onPress={() => {this.addCard(cards, title)}}

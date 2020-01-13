@@ -7,11 +7,13 @@ import { connect } from 'react-redux';
 class NewDeck extends React.Component {
 
     state = {
-        title : ''
+        title : '',
+        titleValidate: ''
+
     }
 
     handleChange = (title) => {
-        this.setState({title})
+        this.setState({title, titleValidate:''})
     }
 
     handleCreate = () => {
@@ -27,15 +29,28 @@ class NewDeck extends React.Component {
         }
 
 
-        createDeck(deck)
-        .then(() => {
-            this.props.dispatch(addDeck(deck));
-            navigation.navigate('Deck', {title});
-        })
-        
-        .catch(() => {
-            console.log('Ups, error saving the deck title');
-        })
+        if(title){
+            createDeck(deck)
+            .then(() => {
+                this.props.dispatch(addDeck(deck));
+                navigation.navigate('Deck', {title});
+            })
+            
+            .catch(() => {
+                console.log('Ups, error saving the deck title');
+            })
+
+            this.setState(({
+                title: ''
+            }))
+
+        } else{
+            this.setState(({
+                titleValidate: 'Please write a title'
+            }))
+        }
+
+       
 
  
 
@@ -44,15 +59,22 @@ class NewDeck extends React.Component {
     }
 
     render() {
+
+        const {titleValidate} = this.state;
+
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <Text>What is the title of your new Deck?</Text>
                 <TextInput
-                    style={{height: 40}}
+                    style={{ padding:10, width: 150, borderColor: 'gray', borderWidth: 1 }}                    
                     placeholder="Deck Title"
                     onChangeText={this.handleChange}
                     value={this.state.title}
                 />
+                { titleValidate.length > 0 &&    
+                    <Text> {titleValidate}
+                </Text>}
+
                 <Button
                     title="Submit"
                     onPress={this.handleCreate}

@@ -14,10 +14,11 @@ class CardAnswer extends React.Component {
 
     render () {
 
-        const {answer} = this.props;
+        const {answer, currentQuestion, totalQuestions} = this.props;
 
         return (
             <View>
+                <Text>{currentQuestion}/{totalQuestions}</Text>
                 <Text>{answer}</Text>
                 <Button
                     title="Question"
