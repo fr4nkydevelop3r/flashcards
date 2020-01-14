@@ -3,6 +3,7 @@ import { Text, View, Button } from 'react-native';
 import { connect } from 'react-redux';
 import CardQuestion from './CardQuestion';
 import CardAnswer from './CardAnswer';
+import { setLocalNotification, clearLocalNotification } from '../utils/helpers'
 
 class Quiz extends React.Component{
 
@@ -22,6 +23,8 @@ class Quiz extends React.Component{
 
    handleAnswer = (answer) => {
 
+    const { totalIncorrect, totalCorrect, totalQuestions} = this.state;
+
     this.setState(({
         showCard: 'question'
     }))
@@ -35,6 +38,13 @@ class Quiz extends React.Component{
             totalIncorrect: this.state.totalIncorrect + 1
         }))
     }
+
+    if((totalCorrect + totalIncorrect) === totalQuestions - 1){
+        clearLocalNotification()
+        .then(setLocalNotification)
+    }
+
+
    }
 
    handleCurrent = () => {
