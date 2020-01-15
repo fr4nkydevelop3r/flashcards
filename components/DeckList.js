@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet, 
   SafeAreaView, TouchableOpacity, AsyncStorage,
-  NavigationEvents, Alert} from 'react-native';
+  Animated} from 'react-native';
 import {getDecks} from '../utils/api';
 import { connect } from 'react-redux';
 const DECKS_STORAGE_KEY = 'Decks';
@@ -9,23 +9,38 @@ const DECKS_STORAGE_KEY = 'Decks';
 
 
 
-function Item ({title, navigation, questions}){
+class Item extends React.Component{
 
-   onPress = () => {
+
+  onPress = () => {
     
+    const { navigation, title } = this.props;
+    
+
     navigation.navigate('Deck', {title});
    
   }
 
-  return (
-    <TouchableOpacity onPress={this.onPress}>
-      
-     <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
-       <Text>{title}</Text>
-       <Text>{questions.length} cards</Text>
-     </View>
-    </TouchableOpacity>
-  )
+  render () {
+    const { title, questions } = this.props
+    return (
+
+      <TouchableOpacity onPress={this.onPress} style={styles.card}>
+        
+    
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.totalCars}>{questions.length} cards</Text>
+     </TouchableOpacity>
+
+
+
+     
+    )
+  }
+
+  
+
+
 }
 
 
@@ -71,18 +86,19 @@ class DeckList extends React.Component {
             Object.keys(listDecks).length > 0 
             
             ?   
-              <SafeAreaView style={styles.container}>
+              <SafeAreaView style={styles.container} >
                     <FlatList 
                         data={listDecks}
                         renderItem={({ item }) => <Item title={item.title} questions={item.questions} navigation={navigation} />}
                         keyExtractor={item => item.title}
+                        contentContainerStyle={{justifyContent: 'center'}}
+                        style={styles.listCards}
 
-                        
-                    />
+                        />
                 </SafeAreaView> 
             
               
-            : <View style={styles.container}><Text>You don't have decks yet!</Text></View>
+            : <View style={{flex:1, justifyContent:'center', alignItems: 'center'}}><Text style={styles.noCards}>You don't have decks yet! 🗂️</Text></View>
        
         )
     }
@@ -90,17 +106,44 @@ class DeckList extends React.Component {
 
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignContent: 'center'
+  container: {
+    flex: 1,
+    backgroundColor: '#fff'
     },
-    button: {
-      alignItems: 'center',
-      backgroundColor: '#DDDDDD',
-      padding: 10
-    },
-  });
+  listCards: {
+    marginTop: 50,
+    backgroundColor: '#fff'
+    
+  },
+  card: {
+    backgroundColor: '#fe346e',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 200,
+    borderWidth: 2,
+    borderBottomRightRadius:20,
+    borderRadius:5,
+    borderColor: '#fe346e'
+  },
+  title: {
+    fontSize: 32,
+    color: '#fff'
+  },
+  totalCars: {
+    fontSize: 20,
+    color: '#fff'
+  },
+  noCards: {
+    fontSize: 16,
+    alignItems: 'center',
+    color: '#fe346e'
+  }, 
+
+});
+
   
 
 function mapStateToProps(decks){

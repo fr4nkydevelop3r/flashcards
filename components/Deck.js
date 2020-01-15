@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { HeaderBackButton } from 'react-navigation-stack';
 
@@ -47,6 +47,44 @@ class Deck extends React.Component {
         )   
     }
 }
+
+
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: "#FFF",
+      alignItems: "center",
+      justifyContent: "center"
+    },
+    item: {},
+    btn: {
+      backgroundColor: "#480032",
+      width: 100,
+      height: 40,
+      padding: 3,
+      justifyContent: "center",
+      borderRadius: 6
+    },
+    text: {
+      fontSize: 20,
+      color: "#fff",
+      fontWeight: "bold",
+      textAlign: "center"
+    },
+    item1: {
+      backgroundColor: "red",
+      padding: 20,
+      width: 100,
+      margin: 10
+    },
+  
+    textBtn: {
+      color: "#f4f4f4",
+      fontWeight: "bold",
+      textAlign: "center"
+    }
+  });
 
 
 function mapStateToProps(decks, ownProps){
