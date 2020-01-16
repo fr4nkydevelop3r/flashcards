@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TextInput, View, Button } from 'react-native';
+import { Text, TextInput, View, TouchableOpacity, StyleSheet } from 'react-native';
 import {createDeck} from '../utils/api';
 import { addDeck } from '../actions/index';
 import { connect } from 'react-redux';
@@ -63,10 +63,10 @@ class NewDeck extends React.Component {
         const {titleValidate} = this.state;
 
         return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>What is the title of your new Deck?</Text>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
+                <Text style={styles.deckTitle}>What is the title of your new Deck?</Text>
                 <TextInput
-                    style={{ padding:10, width: 150, borderColor: 'gray', borderWidth: 1 }}                    
+                    style={styles.textInput}                    
                     placeholder="Deck Title"
                     onChangeText={this.handleChange}
                     value={this.state.title}
@@ -75,13 +75,42 @@ class NewDeck extends React.Component {
                     <Text> {titleValidate}
                 </Text>}
 
-                <Button
-                    title="Submit"
+                <TouchableOpacity
                     onPress={this.handleCreate}
-                />
+                    style={styles.submitBtn}
+                >
+                    <Text style={{color: '#fff'}}>Submit</Text>
+                </TouchableOpacity>
             </View>
         )
     }
 }
+
+
+const styles = StyleSheet.create({
+    deckTitle: {
+        padding:10,
+        fontSize: 16,
+        color: '#fe34e6'
+        
+    },
+    textInput: {
+        padding: 10,
+        width: 150,
+        borderColor: '#111d5e',
+        borderWidth:1,
+        color: '#fe34e6',
+        marginTop: 8,
+        marginBottom: 16
+         
+    },
+    submitBtn: {
+        padding: 10,
+        backgroundColor: '#111d5e',
+        width: 100,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
+})
 
 export default connect()(NewDeck);

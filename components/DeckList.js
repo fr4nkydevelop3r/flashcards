@@ -98,7 +98,7 @@ class DeckList extends React.Component {
                 </SafeAreaView> 
             
               
-            : <View style={{flex:1, justifyContent:'center', alignItems: 'center'}}><Text style={styles.noCards}>You don't have decks yet! 🗂️</Text></View>
+            : <View style={{flex:1, justifyContent:'center', alignItems: 'center', backgroundColor: '#fff'}}><Text style={styles.noCards}>You don't have decks yet! 🗂️</Text></View>
        
         )
     }

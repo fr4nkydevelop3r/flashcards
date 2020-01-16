@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { HeaderBackButton } from 'react-navigation-stack';
 
@@ -14,9 +14,10 @@ class Deck extends React.Component {
           <HeaderBackButton  
             onPress={_ => navigation.navigate("DeckList")}
             label='Decks'
+            tintColor = '#fe346e' 
 
             />,
-      
+            headerTintColor: '#fe346e'
         };
       };
     
@@ -32,18 +33,37 @@ class Deck extends React.Component {
 
         const {cards, title, navigation} = this.props;
         return (
-            <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
-                <Text>{title}</Text>
-                <Text>{cards.length} cards</Text>
-                <Button
-                    title="Add Card"
+         /*  <View style={styles.container}>
+                <Text style={styles.title}>{title}</Text> 
+                <Text>{cards.length} cards</Text> 
+                <TouchableOpacity
                     onPress={this.addCard}
-                />
-                <Button 
-                    title="Start Quiz"
+                ><Text>Add Card</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
                     onPress={() =>  navigation.navigate('Quiz', {title}) }
-                />
-            </View>
+                > <Text>Start Quiz</Text> 
+                </TouchableOpacity>
+        </View> */
+
+        <View style={styles.container}>
+            <Text style={styles.title}>{title}</Text> 
+            <Text style={styles.cards}>{cards.length} cards</Text> 
+            <TouchableOpacity
+                onPress={this.addCard}
+                style={styles.btn}
+            >
+                <Text style={{color: '#fff'}}>Add Card</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                onPress={() =>  navigation.navigate('Quiz', {title}) }
+                style={styles.btn}
+            >
+                <Text style={{color: '#fff'}}>Start Quiz</Text>
+            </TouchableOpacity>
+        </View>
+
+
         )   
     }
 }
@@ -53,37 +73,29 @@ class Deck extends React.Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "#FFF",
+      backgroundColor: "#fff",
       alignItems: "center",
       justifyContent: "center"
     },
-    item: {},
+    title: {
+        fontSize: 20,
+        color: '#111d5e',
+        marginBottom: 8
+    },
+    cards: {
+        color: '#111d5e',
+        marginBottom: 8
+
+    },
     btn: {
-      backgroundColor: "#480032",
-      width: 100,
-      height: 40,
-      padding: 3,
-      justifyContent: "center",
-      borderRadius: 6
-    },
-    text: {
-      fontSize: 20,
-      color: "#fff",
-      fontWeight: "bold",
-      textAlign: "center"
-    },
-    item1: {
-      backgroundColor: "red",
-      padding: 20,
-      width: 100,
-      margin: 10
-    },
-  
-    textBtn: {
-      color: "#f4f4f4",
-      fontWeight: "bold",
-      textAlign: "center"
+        padding: 10,
+        backgroundColor: '#111d5e',
+        width: 100,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 16
     }
+    
   });
 
 

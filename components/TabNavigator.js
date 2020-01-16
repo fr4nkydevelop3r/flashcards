@@ -9,7 +9,7 @@ import Quiz from './Quiz';
 import Deck from './Deck';
 import { createStackNavigator } from 'react-navigation-stack';
 import  Constants  from 'expo-constants';
-import { FontAwesome, Ionicons, AntDesign } from '@expo/vector-icons';
+import { FontAwesome, AntDesign } from '@expo/vector-icons';
 
 
 
