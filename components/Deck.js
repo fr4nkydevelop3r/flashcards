@@ -33,18 +33,6 @@ class Deck extends React.Component {
 
         const {cards, title, navigation} = this.props;
         return (
-         /*  <View style={styles.container}>
-                <Text style={styles.title}>{title}</Text> 
-                <Text>{cards.length} cards</Text> 
-                <TouchableOpacity
-                    onPress={this.addCard}
-                ><Text>Add Card</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() =>  navigation.navigate('Quiz', {title}) }
-                > <Text>Start Quiz</Text> 
-                </TouchableOpacity>
-        </View> */
 
         <View style={styles.container}>
             <Text style={styles.title}>{title}</Text> 

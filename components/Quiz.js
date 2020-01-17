@@ -1,11 +1,20 @@
 import React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import CardQuestion from './CardQuestion';
 import CardAnswer from './CardAnswer';
 import { setLocalNotification, clearLocalNotification } from '../utils/helpers'
 
 class Quiz extends React.Component{
+
+    static navigationOptions = ({ navigation }) => {
+        return {
+          title: 'Quiz',
+          headerTintColor: '#fe346e'
+
+         };
+      };
+    
 
     state = {
         showCard : 'question',
@@ -78,22 +87,27 @@ class Quiz extends React.Component{
  
 
         return (
-            <View style={{flex:1, justifyContent:'center', alignItems: 'center'}}>
+            <View style={{flex:1, justifyContent:'center', alignItems: 'center', backgroundColor:'#fff'}}>
                 {totalQuestions === 0 ?
-                    <Text>Sorry, you can't take quiz because there aren't cards in
+                <View style={{width: 300}}>
+                    <Text style={{color: '#fe34e6', fontSize: 20, textAlign:'center'}}>Sorry, you can't take quiz because there aren't cards in
                         the deck.
-                    </Text>  :
+                    </Text>  
+                </View>
+                    :
 
 
                     currentQuestion === totalQuestions ? 
 
-                    <View>
-                        <Text>You got {totalCorrect} correct answers!</Text>
-                        <Text>You got {totalIncorrect} incorrect answers!</Text>
-                        <Button
-                            title="Reset Quiz"
+                    <View style={styles.container} >
+                        <Text style={styles.totalText}>You got {totalCorrect} correct answers!</Text>
+                        <Text style={styles.totalText}>You got {totalIncorrect} incorrect answers!</Text>
+                        <TouchableOpacity
                             onPress={() => this.handleResetQuiz() }
-                        />
+                            style={styles.resetBtn}
+                        > 
+                        <Text style={{color: '#fff'}}>Reset Quiz</Text> 
+                        </TouchableOpacity>
 
                     </View> :
 
@@ -119,6 +133,30 @@ class Quiz extends React.Component{
         )
     }
 }
+
+const styles = StyleSheet.create({
+
+    container: {
+        justifyContent: 'center',
+        alignItems: 'center',
+         
+    },
+    resetBtn: {
+        padding: 10,
+        backgroundColor: '#fe34e6',
+        width: 100,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    totalText: {
+        padding: 12,
+        marginBottom: 16,
+        color: '#fe34e6',
+        fontSize: 18
+
+    }
+})
+
 
 
 function mapStateToProps(decks, ownProps){

@@ -64,7 +64,7 @@ class DeckList extends React.Component {
                 }
             }) */
 
-            AsyncStorage.removeItem(DECKS_STORAGE_KEY);
+            //AsyncStorage.removeItem(DECKS_STORAGE_KEY);
 
     }
 
