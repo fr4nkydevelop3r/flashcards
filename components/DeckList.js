@@ -27,7 +27,7 @@ function DeckList({ decks, navigation }) {
   const listDecks = Object.values(decks);
   //console.log(listDecks);
   return Object.keys(listDecks).length > 0 ? (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <FlatList
         data={listDecks}
         renderItem={({ item }) => (
@@ -41,7 +41,7 @@ function DeckList({ decks, navigation }) {
         contentContainerStyle={{ justifyContent: 'center' }}
         style={styles.listCards}
       />
-    </SafeAreaView>
+    </View>
   ) : (
     <View
       style={{
