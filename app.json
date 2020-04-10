@@ -1,13 +1,14 @@
 {
   "expo": {
     "name": "flashcards",
+    "description": "The ugliest study app",
     "slug": "mobile-flashcards",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "https://www.freepnglogos.com/uploads/notebook-png/diary-note-book-spiral-notebook-icon-20.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -19,6 +20,9 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
+    },
+    "notification": {
+      "icon": "https://www.freepnglogos.com/uploads/notebook-png/diary-note-book-spiral-notebook-icon-20.png"
     }
   }
 }
